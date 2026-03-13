@@ -1,74 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>우마무스메 육성 기록</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <style>
-    html, body { height: 100%; margin: 0; padding: 0; background: #e8e8f0; }
-    #app-wrapper {
-      max-width: 450px;
-      min-height: 100vh;
-      margin: 0 auto;
-      background: #fff;
-      box-shadow: 0 0 20px rgba(0,0,0,.15);
-      display: flex;
-      flex-direction: column;
-    }
-    #navbar-area { flex-shrink: 0; background: #fff; border-bottom: 2px solid #dee2e6; }
-    .app-nav .nav-link {
-      font-size: 0.8rem;
-      padding: 0.55rem 0.5rem;
-      color: #6c757d;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-    }
-    .app-nav .nav-link i { font-size: 1.1rem; }
-    .app-nav .nav-link.active { color: #0d6efd; font-weight: 700; border-bottom: 2px solid #0d6efd; }
-    .app-nav .nav-link:hover { color: #0d6efd; }
-    #page-content { flex: 1; overflow-y: auto; padding: 0.75rem; }
-    .page-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.75rem;
-    }
-    .page-header h6 { margin: 0; font-weight: 700; font-size: 0.95rem; }
-    .table thead th { font-size: 0.75rem; white-space: nowrap; vertical-align: middle; }
-    .table tbody td { font-size: 0.78rem; vertical-align: middle; }
-    .empty-state { text-align: center; padding: 3rem 1rem; color: #adb5bd; }
-    .empty-state i { font-size: 2.8rem; display: block; margin-bottom: 0.5rem; }
-    .empty-state p { font-size: 0.85rem; }
-    .badge-sm { font-size: 0.68rem; }
-    .filter-bar { background: #f8f9fa; border-radius: 6px; padding: 0.5rem; margin-bottom: 0.75rem; }
-  </style>
-</head>
-<body>
-<div id="app-wrapper">
-  <div id="navbar-area"></div>
-  <div id="page-content"></div>
-</div>
-
-<!-- 모달 영역 (페이지 리렌더 영향 없음) -->
-<div id="modal-area"></div>
-
-<!-- Toast 컨테이너 -->
-<div id="toast-container" class="position-fixed bottom-0 start-50 translate-middle-x p-3" style="z-index:9999;width:420px;"></div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script src="assets/racetracks_static.js"></script>
-<script src="assets/characters_static.js"></script>
-<script src="renderer/components/utils.js"></script>
-<script src="renderer/components/toast.js"></script>
-<script src="renderer/pages/racetracks.js"></script>
-<script src="renderer/pages/characters.js"></script>
-<script src="renderer/pages/training.js"></script>
-<script src="renderer/pages/stats.js"></script>
-<script src="renderer/app.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>우마무스메 육성 기록</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

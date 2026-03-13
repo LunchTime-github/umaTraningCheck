@@ -8,6 +8,10 @@ contextBridge.exposeInMainWorld('electronAPI', {
     update: (key, id, updates) => ipcRenderer.invoke('store:update', key, id, updates),
     delete: (key, id) => ipcRenderer.invoke('store:delete', key, id),
   },
+  data: {
+    getCharactersCatalog: () => ipcRenderer.invoke('data:getCharactersCatalog'),
+    refreshCharacters: () => ipcRenderer.invoke('data:refreshCharacters'),
+  },
   shell: {
     openExternal: (url) => ipcRenderer.invoke('shell:openExternal', url),
   },
