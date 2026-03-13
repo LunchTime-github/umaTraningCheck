@@ -1,0 +1,755 @@
+{
+  "characters": [
+    {
+      "id": 1,
+      "name": "스페셜 위크",
+      "releaseDate": "2021-02-24",
+      "urlKey": "100101-special-week"
+    },
+    {
+      "id": 2,
+      "name": "사일런스 스즈카",
+      "releaseDate": "2021-02-24",
+      "urlKey": "100201-silence-suzuka"
+    },
+    {
+      "id": 3,
+      "name": "토카이 테이오",
+      "releaseDate": "2021-02-24",
+      "urlKey": "100301-tokai-teio"
+    },
+    {
+      "id": 4,
+      "name": "마루젠스키",
+      "releaseDate": "2021-02-24",
+      "urlKey": "100401-maruzensky"
+    },
+    {
+      "id": 5,
+      "name": "후지 키세키",
+      "releaseDate": "2021-02-24",
+      "urlKey": "100501-fuji-kiseki"
+    },
+    {
+      "id": 6,
+      "name": "오구리 캡",
+      "releaseDate": "2021-02-24",
+      "urlKey": "100601-oguri-cap"
+    },
+    {
+      "id": 7,
+      "name": "골드 쉽",
+      "releaseDate": "2021-02-24",
+      "urlKey": "100701-gold-ship"
+    },
+    {
+      "id": 8,
+      "name": "우옷카",
+      "releaseDate": "2021-02-24",
+      "urlKey": "100801-vodka"
+    },
+    {
+      "id": 9,
+      "name": "다이와 스칼렛",
+      "releaseDate": "2021-02-24",
+      "urlKey": "100901-daiwa-scarlet"
+    },
+    {
+      "id": 12,
+      "name": "그래스 원더",
+      "releaseDate": "2021-02-24",
+      "urlKey": "101101-grass-wonder"
+    },
+    {
+      "id": 16,
+      "name": "메지로 맥퀸",
+      "releaseDate": "2021-02-24",
+      "urlKey": "101301-mejiro-mcqueen"
+    },
+    {
+      "id": 11,
+      "name": "엘 콘도르 파사",
+      "releaseDate": "2021-02-24",
+      "urlKey": "101401-el-condor-pasa"
+    },
+    {
+      "id": 20,
+      "name": "나리타 브라이언",
+      "releaseDate": "2021-02-24",
+      "urlKey": "101601-narita-brian"
+    },
+    {
+      "id": 10,
+      "name": "에어 그루브",
+      "releaseDate": "2021-02-24",
+      "urlKey": "101801-air-groove"
+    },
+    {
+      "id": 13,
+      "name": "세이운 스카이",
+      "releaseDate": "2021-02-24",
+      "urlKey": "102001-seiun-sky"
+    },
+    {
+      "id": 19,
+      "name": "비와 하야히데",
+      "releaseDate": "2021-02-24",
+      "urlKey": "102301-biwa-hayahide"
+    },
+    {
+      "id": 21,
+      "name": "미호노 부르봉",
+      "releaseDate": "2021-02-24",
+      "urlKey": "102601-mihono-bourbon"
+    },
+    {
+      "id": 22,
+      "name": "라이스 샤워",
+      "releaseDate": "2021-02-24",
+      "urlKey": "103001-rice-shower"
+    },
+    {
+      "id": 18,
+      "name": "위닝 티켓",
+      "releaseDate": "2021-02-24",
+      "urlKey": "103501-winning-ticket"
+    },
+    {
+      "id": 23,
+      "name": "슈퍼 크릭",
+      "releaseDate": "2021-02-24",
+      "urlKey": "104501-super-creek"
+    },
+    {
+      "id": 15,
+      "name": "메이쇼 도토",
+      "releaseDate": "2021-02-24",
+      "urlKey": "105801-meisho-doto"
+    },
+    {
+      "id": 17,
+      "name": "나이스 네이쳐",
+      "releaseDate": "2021-02-24",
+      "urlKey": "106001-nice-nature"
+    },
+    {
+      "id": 14,
+      "name": "킹 헤일로",
+      "releaseDate": "2021-02-24",
+      "urlKey": "106101-king-halo"
+    },
+    {
+      "id": 24,
+      "name": "파인 모션",
+      "releaseDate": "2021-02-24",
+      "urlKey": "102201-fine-motion"
+    },
+    {
+      "id": 25,
+      "name": "이쿠노 딕터스",
+      "releaseDate": "2021-02-24",
+      "urlKey": "106301-ikuno-dictus"
+    },
+    {
+      "id": 26,
+      "name": "맨해튼 카페",
+      "releaseDate": "2021-05-30",
+      "urlKey": "102501-manhattan-cafe"
+    },
+    {
+      "id": 27,
+      "name": "어드마이어 베가",
+      "releaseDate": "2021-05-30",
+      "urlKey": "103301-admire-vega"
+    },
+    {
+      "id": 28,
+      "name": "T.M. 오페라 오",
+      "releaseDate": "2021-06-27",
+      "urlKey": "101501-tm-opera-o"
+    },
+    {
+      "id": 30,
+      "name": "아그네스 디지털",
+      "releaseDate": "2021-09-26",
+      "urlKey": "101901-agnes-digital"
+    },
+    {
+      "id": 29,
+      "name": "나리타 탑 로드",
+      "releaseDate": "2021-09-26",
+      "urlKey": "107701-narita-top-road"
+    },
+    {
+      "id": 32,
+      "name": "히시 아마존",
+      "releaseDate": "2021-10-31",
+      "urlKey": "101201-hishi-amazon"
+    },
+    {
+      "id": 31,
+      "name": "심볼리 루돌프",
+      "releaseDate": "2021-10-31",
+      "urlKey": "101701-symboli-rudolf"
+    },
+    {
+      "id": 33,
+      "name": "마야노 탑건",
+      "releaseDate": "2021-10-31",
+      "urlKey": "102401-mayano-top-gun"
+    },
+    {
+      "id": 34,
+      "name": "카렌 챤",
+      "releaseDate": "2021-12-28",
+      "urlKey": "103801-curren-chan"
+    },
+    {
+      "id": 36,
+      "name": "타이키 샤틀",
+      "releaseDate": "2022-01-30",
+      "urlKey": "101001-taiki-shuttle"
+    },
+    {
+      "id": 35,
+      "name": "아그네스 타키온",
+      "releaseDate": "2022-01-30",
+      "urlKey": "103201-agnes-tachyon"
+    },
+    {
+      "id": 37,
+      "name": "에이신 플래시",
+      "releaseDate": "2022-03-27",
+      "urlKey": "103701-eishin-flash"
+    },
+    {
+      "id": 38,
+      "name": "스마트 팔콘",
+      "releaseDate": "2022-03-27",
+      "urlKey": "104601-smart-falcon"
+    },
+    {
+      "id": 39,
+      "name": "스위프 토쇼",
+      "releaseDate": "2022-05-29",
+      "urlKey": "104401-sweep-tosho"
+    },
+    {
+      "id": 40,
+      "name": "메지로 도베르",
+      "releaseDate": "2022-06-26",
+      "urlKey": "105901-mejiro-dober"
+    },
+    {
+      "id": 41,
+      "name": "츠루마루 츠요시",
+      "releaseDate": "2022-06-26",
+      "urlKey": "107301-tsurumaru-tsuyoshi"
+    },
+    {
+      "id": 42,
+      "name": "타마모 크로스",
+      "releaseDate": "2022-07-31",
+      "urlKey": "102101-tamamo-cross"
+    },
+    {
+      "id": 43,
+      "name": "키타산 블랙",
+      "releaseDate": "2022-08-28",
+      "urlKey": "106801-kitasan-black"
+    },
+    {
+      "id": 44,
+      "name": "사토노 다이아몬드",
+      "releaseDate": "2022-08-28",
+      "urlKey": "106701-satono-diamond"
+    },
+    {
+      "id": 45,
+      "name": "나리타 타이신",
+      "releaseDate": "2022-09-25",
+      "urlKey": "105001-narita-taishin"
+    },
+    {
+      "id": 46,
+      "name": "니시노 플라워",
+      "releaseDate": "2022-09-25",
+      "urlKey": "105101-nishino-flower"
+    },
+    {
+      "id": 47,
+      "name": "뱀부 메모리",
+      "releaseDate": "2022-10-30",
+      "urlKey": "105301-bamboo-memory"
+    },
+    {
+      "id": 48,
+      "name": "야에노 무테키",
+      "releaseDate": "2022-11-27",
+      "urlKey": "107201-yaeno-muteki"
+    },
+    {
+      "id": 49,
+      "name": "에어 샤쿠르",
+      "releaseDate": "2022-12-25",
+      "urlKey": "103601-air-shakur"
+    },
+    {
+      "id": 51,
+      "name": "메지로 아루당",
+      "releaseDate": "2023-01-29",
+      "urlKey": "107101-mejiro-ardan"
+    },
+    {
+      "id": 52,
+      "name": "히시 미라클",
+      "releaseDate": "2023-02-26",
+      "urlKey": "110601-hishi-miracle"
+    },
+    {
+      "id": 55,
+      "name": "이나리 원",
+      "releaseDate": "2023-06-25",
+      "urlKey": "103401-inari-one"
+    },
+    {
+      "id": 57,
+      "name": "메지로 파메르",
+      "releaseDate": "2023-07-30",
+      "urlKey": "106401-mejiro-palmer"
+    },
+    {
+      "id": 59,
+      "name": "나카야마 페스타",
+      "releaseDate": "2023-10-29",
+      "urlKey": "104901-nakayama-festa"
+    },
+    {
+      "id": 60,
+      "name": "트랜센드",
+      "releaseDate": "2023-10-29",
+      "urlKey": "108001-transcend"
+    },
+    {
+      "id": 61,
+      "name": "야마닌 제퍼",
+      "releaseDate": "2023-12-24",
+      "urlKey": "107801-yamanin-zephyr"
+    },
+    {
+      "id": 62,
+      "name": "사쿠라 로렐",
+      "releaseDate": "2024-01-28",
+      "urlKey": "107601-sakura-laurel"
+    },
+    {
+      "id": "s_mejiro-ryan",
+      "name": "Mejiro Ryan",
+      "releaseDate": "",
+      "urlKey": "102701-mejiro-ryan"
+    },
+    {
+      "id": "s_hishi-akebono",
+      "name": "Hishi Akebono",
+      "releaseDate": "",
+      "urlKey": "102801-hishi-akebono"
+    },
+    {
+      "id": "s_yukino-bijin",
+      "name": "Yukino Bijin",
+      "releaseDate": "",
+      "urlKey": "102901-yukino-bijin"
+    },
+    {
+      "id": "s_ines-fujin",
+      "name": "Ines Fujin",
+      "releaseDate": "",
+      "urlKey": "103101-ines-fujin"
+    },
+    {
+      "id": "s_kawakami-princess",
+      "name": "Kawakami Princess",
+      "releaseDate": "",
+      "urlKey": "103901-kawakami-princess"
+    },
+    {
+      "id": "s_gold-city",
+      "name": "Gold City",
+      "releaseDate": "",
+      "urlKey": "104001-gold-city"
+    },
+    {
+      "id": "s_sakura-bakushin-o",
+      "name": "Sakura Bakushin O",
+      "releaseDate": "",
+      "urlKey": "104101-sakura-bakushin-o"
+    },
+    {
+      "id": "s_seeking-the-pearl",
+      "name": "Seeking The Pearl",
+      "releaseDate": "",
+      "urlKey": "104201-seeking-the-pearl"
+    },
+    {
+      "id": "s_shinko-windy",
+      "name": "Shinko Windy",
+      "releaseDate": "",
+      "urlKey": "104301-shinko-windy"
+    },
+    {
+      "id": "s_zenno-rob-roy",
+      "name": "Zenno Rob Roy",
+      "releaseDate": "",
+      "urlKey": "104701-zenno-rob-roy"
+    },
+    {
+      "id": "s_tosen-jordan",
+      "name": "Tosen Jordan",
+      "releaseDate": "",
+      "urlKey": "104801-tosen-jordan"
+    },
+    {
+      "id": "s_haru-urara",
+      "name": "Haru Urara",
+      "releaseDate": "",
+      "urlKey": "105201-haru-urara"
+    },
+    {
+      "id": "s_biko-pegasus",
+      "name": "Biko Pegasus",
+      "releaseDate": "",
+      "urlKey": "105401-biko-pegasus"
+    },
+    {
+      "id": "s_marvelous-sunday",
+      "name": "Marvelous Sunday",
+      "releaseDate": "",
+      "urlKey": "105501-marvelous-sunday"
+    },
+    {
+      "id": "s_matikanefukukitaru",
+      "name": "Matikanefukukitaru",
+      "releaseDate": "",
+      "urlKey": "105601-matikanefukukitaru"
+    },
+    {
+      "id": "s_mr-cb",
+      "name": "Mr Cb",
+      "releaseDate": "",
+      "urlKey": "105701-mr-cb"
+    },
+    {
+      "id": "s_matikanetannhauser",
+      "name": "Matikanetannhauser",
+      "releaseDate": "",
+      "urlKey": "106201-matikanetannhauser"
+    },
+    {
+      "id": "s_daitaku-helios",
+      "name": "Daitaku Helios",
+      "releaseDate": "",
+      "urlKey": "106501-daitaku-helios"
+    },
+    {
+      "id": "s_twin-turbo",
+      "name": "Twin Turbo",
+      "releaseDate": "",
+      "urlKey": "106601-twin-turbo"
+    },
+    {
+      "id": "s_sakura-chiyono-o",
+      "name": "Sakura Chiyono O",
+      "releaseDate": "",
+      "urlKey": "106901-sakura-chiyono-o"
+    },
+    {
+      "id": "s_sirius-symboli",
+      "name": "Sirius Symboli",
+      "releaseDate": "",
+      "urlKey": "107001-sirius-symboli"
+    },
+    {
+      "id": "s_mejiro-bright",
+      "name": "Mejiro Bright",
+      "releaseDate": "",
+      "urlKey": "107401-mejiro-bright"
+    },
+    {
+      "id": "s_furioso",
+      "name": "Furioso",
+      "releaseDate": "",
+      "urlKey": "107901-furioso"
+    },
+    {
+      "id": "s_espoir-city",
+      "name": "Espoir City",
+      "releaseDate": "",
+      "urlKey": "108101-espoir-city"
+    },
+    {
+      "id": "s_north-flight",
+      "name": "North Flight",
+      "releaseDate": "",
+      "urlKey": "108201-north-flight"
+    },
+    {
+      "id": "s_symboli-kris-s",
+      "name": "Symboli Kris S",
+      "releaseDate": "",
+      "urlKey": "108301-symboli-kris-s"
+    },
+    {
+      "id": "s_tanino-gimlet",
+      "name": "Tanino Gimlet",
+      "releaseDate": "",
+      "urlKey": "108401-tanino-gimlet"
+    },
+    {
+      "id": "s_daiichi-ruby",
+      "name": "Daiichi Ruby",
+      "releaseDate": "",
+      "urlKey": "108501-daiichi-ruby"
+    },
+    {
+      "id": "s_mejiro-ramonu",
+      "name": "Mejiro Ramonu",
+      "releaseDate": "",
+      "urlKey": "108601-mejiro-ramonu"
+    },
+    {
+      "id": "s_aston-machan",
+      "name": "Aston Machan",
+      "releaseDate": "",
+      "urlKey": "108701-aston-machan"
+    },
+    {
+      "id": "s_satono-crown",
+      "name": "Satono Crown",
+      "releaseDate": "",
+      "urlKey": "108801-satono-crown"
+    },
+    {
+      "id": "s_cheval-grand",
+      "name": "Cheval Grand",
+      "releaseDate": "",
+      "urlKey": "108901-cheval-grand"
+    },
+    {
+      "id": "s_verxina",
+      "name": "Verxina",
+      "releaseDate": "",
+      "urlKey": "109001-verxina"
+    },
+    {
+      "id": "s_vivlos",
+      "name": "Vivlos",
+      "releaseDate": "",
+      "urlKey": "109101-vivlos"
+    },
+    {
+      "id": "s_dantsu-flame",
+      "name": "Dantsu Flame",
+      "releaseDate": "",
+      "urlKey": "109201-dantsu-flame"
+    },
+    {
+      "id": "s_ksmiracle",
+      "name": "Ksmiracle",
+      "releaseDate": "",
+      "urlKey": "109301-ksmiracle"
+    },
+    {
+      "id": "s_jungle-pocket",
+      "name": "Jungle Pocket",
+      "releaseDate": "",
+      "urlKey": "109401-jungle-pocket"
+    },
+    {
+      "id": "s_believe",
+      "name": "Believe",
+      "releaseDate": "",
+      "urlKey": "109501-believe"
+    },
+    {
+      "id": "s_no-reason",
+      "name": "No Reason",
+      "releaseDate": "",
+      "urlKey": "109601-no-reason"
+    },
+    {
+      "id": "s_still-in-love",
+      "name": "Still In Love",
+      "releaseDate": "",
+      "urlKey": "109701-still-in-love"
+    },
+    {
+      "id": "s_copano-rickey",
+      "name": "Copano Rickey",
+      "releaseDate": "",
+      "urlKey": "109801-copano-rickey"
+    },
+    {
+      "id": "s_hokko-tarumae",
+      "name": "Hokko Tarumae",
+      "releaseDate": "",
+      "urlKey": "109901-hokko-tarumae"
+    },
+    {
+      "id": "s_wonder-acute",
+      "name": "Wonder Acute",
+      "releaseDate": "",
+      "urlKey": "110001-wonder-acute"
+    },
+    {
+      "id": "s_sounds-of-earth",
+      "name": "Sounds Of Earth",
+      "releaseDate": "",
+      "urlKey": "110201-sounds-of-earth"
+    },
+    {
+      "id": "s_royce-and-royce",
+      "name": "Royce And Royce",
+      "releaseDate": "",
+      "urlKey": "110301-royce-and-royce"
+    },
+    {
+      "id": "s_katsuragi-ace",
+      "name": "Katsuragi Ace",
+      "releaseDate": "",
+      "urlKey": "110401-katsuragi-ace"
+    },
+    {
+      "id": "s_neo-universe",
+      "name": "Neo Universe",
+      "releaseDate": "",
+      "urlKey": "110501-neo-universe"
+    },
+    {
+      "id": "s_tap-dance-city",
+      "name": "Tap Dance City",
+      "releaseDate": "",
+      "urlKey": "110701-tap-dance-city"
+    },
+    {
+      "id": "s_duramente",
+      "name": "Duramente",
+      "releaseDate": "",
+      "urlKey": "110801-duramente"
+    },
+    {
+      "id": "s_rhein-kraft",
+      "name": "Rhein Kraft",
+      "releaseDate": "",
+      "urlKey": "110901-rhein-kraft"
+    },
+    {
+      "id": "s_cesario",
+      "name": "Cesario",
+      "releaseDate": "",
+      "urlKey": "111001-cesario"
+    },
+    {
+      "id": "s_air-messiah",
+      "name": "Air Messiah",
+      "releaseDate": "",
+      "urlKey": "111101-air-messiah"
+    },
+    {
+      "id": "s_fusaichi-pandora",
+      "name": "Fusaichi Pandora",
+      "releaseDate": "",
+      "urlKey": "111301-fusaichi-pandora"
+    },
+    {
+      "id": "s_buena-vista",
+      "name": "Buena Vista",
+      "releaseDate": "",
+      "urlKey": "111401-buena-vista"
+    },
+    {
+      "id": "s_orfevre",
+      "name": "Orfevre",
+      "releaseDate": "",
+      "urlKey": "111501-orfevre"
+    },
+    {
+      "id": "s_gentildonna",
+      "name": "Gentildonna",
+      "releaseDate": "",
+      "urlKey": "111601-gentildonna"
+    },
+    {
+      "id": "s_win-variation",
+      "name": "Win Variation",
+      "releaseDate": "",
+      "urlKey": "111701-win-variation"
+    },
+    {
+      "id": "s_dream-journey",
+      "name": "Dream Journey",
+      "releaseDate": "",
+      "urlKey": "111901-dream-journey"
+    },
+    {
+      "id": "s_calstone-light-o",
+      "name": "Calstone Light O",
+      "releaseDate": "",
+      "urlKey": "112001-calstone-light-o"
+    },
+    {
+      "id": "s_durandal",
+      "name": "Durandal",
+      "releaseDate": "",
+      "urlKey": "112101-durandal"
+    },
+    {
+      "id": "s_bubble-gum-fellow",
+      "name": "Bubble Gum Fellow",
+      "releaseDate": "",
+      "urlKey": "112401-bubble-gum-fellow"
+    },
+    {
+      "id": "s_fenomeno",
+      "name": "Fenomeno",
+      "releaseDate": "",
+      "urlKey": "112701-fenomeno"
+    },
+    {
+      "id": "s_almond-eye",
+      "name": "Almond Eye",
+      "releaseDate": "",
+      "urlKey": "112901-almond-eye"
+    },
+    {
+      "id": "s_gran-alegria",
+      "name": "Gran Alegria",
+      "releaseDate": "",
+      "urlKey": "113101-gran-alegria"
+    },
+    {
+      "id": "s_loves-only-you",
+      "name": "Loves Only You",
+      "releaseDate": "",
+      "urlKey": "113201-loves-only-you"
+    },
+    {
+      "id": "s_chrono-genesis",
+      "name": "Chrono Genesis",
+      "releaseDate": "",
+      "urlKey": "113301-chrono-genesis"
+    },
+    {
+      "id": "s_stay-gold",
+      "name": "Stay Gold",
+      "releaseDate": "",
+      "urlKey": "113501-stay-gold"
+    },
+    {
+      "id": "s_kiseki",
+      "name": "Kiseki",
+      "releaseDate": "",
+      "urlKey": "113701-kiseki"
+    }
+  ],
+  "updatedAt": "2026-03-13T09:49:46.050Z"
+}

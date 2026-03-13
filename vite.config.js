@@ -7,7 +7,7 @@ const fixElectronScript = {
   transformIndexHtml(html) {
     return html
       .replace(/\s?crossorigin\b/g, '')
-      .replace(/<script\s+type="module"/g, '<script')
+      .replace(/<script\s+type="module"/g, '<script defer')
   },
 }
 
