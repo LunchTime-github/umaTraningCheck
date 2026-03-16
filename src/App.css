@@ -1,9 +1,124 @@
+/* ══════════════════════════════════════════════════════
+   Rule: 2.1 Color Palette — Bootstrap CSS 변수 오버라이드
+   Rule: 2.2 Typography    — Pretendard Variable 폰트
+   Rule: 2.3.3 Border Radius — 레벨별 라디우스 적용
+══════════════════════════════════════════════════════ */
+:root {
+  /* Rule: 2.2 — 폰트 */
+  --bs-font-sans-serif: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --bs-body-font-family: var(--bs-font-sans-serif);
+  --bs-body-color: #3f4141; /* gray-080 */
+
+  /* Rule: 2.1 — Primary → Teal */
+  --bs-primary: #5cc29b;
+  --bs-primary-rgb: 92, 194, 155;
+  --bs-link-color: #5cc29b;
+  --bs-link-color-rgb: 92, 194, 155;
+  --bs-link-hover-color: #4ab08a;
+
+  /* Rule: 2.3.3 — Level 1: 16px (모달/카드), Level 2: 10px (버튼/인풋), Level 3: 8px (sm) */
+  --bs-border-radius: 10px;
+  --bs-border-radius-sm: 8px;
+  --bs-border-radius-lg: 16px;
+  --bs-border-radius-xl: 16px;
+  --bs-border-radius-xxl: 16px;
+  --bs-modal-border-radius: 16px;
+  --bs-modal-inner-border-radius: 15px;
+  --bs-card-border-radius: 16px;
+  --bs-card-inner-border-radius: 15px;
+
+  /* Rule: 2.1 — Border */
+  --bs-border-color: #e4e4e6; /* gray-020 */
+}
+
+/* Rule: 2.1 — btn-primary : Teal */
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #5cc29b;
+  --bs-btn-border-color: #5cc29b;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #4ab08a;
+  --bs-btn-hover-border-color: #4ab08a;
+  --bs-btn-focus-shadow-rgb: 92, 194, 155;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #4ab08a;
+  --bs-btn-active-border-color: #4ab08a;
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #5cc29b;
+  --bs-btn-disabled-border-color: #5cc29b;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #5cc29b;
+  --bs-btn-border-color: #5cc29b;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #5cc29b;
+  --bs-btn-hover-border-color: #5cc29b;
+  --bs-btn-focus-shadow-rgb: 92, 194, 155;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #5cc29b;
+  --bs-btn-active-border-color: #5cc29b;
+}
+
+/* Rule: 3.1.3 — Outline (Neutral) : border-gray-020, bg-white, text-gray-080 */
+.btn-outline-neutral {
+  --bs-btn-color: #3f4141; /* gray-080 */
+  --bs-btn-border-color: #e4e4e6; /* gray-020 */
+  --bs-btn-bg: #fff;
+  --bs-btn-hover-color: #272929; /* gray-090 */
+  --bs-btn-hover-bg: #f6f6f7; /* gray-005 */
+  --bs-btn-hover-border-color: #e4e4e6;
+  --bs-btn-focus-shadow-rgb: 63, 65, 65;
+  --bs-btn-active-color: #272929;
+  --bs-btn-active-bg: #ececee; /* gray-010 */
+  --bs-btn-active-border-color: #e4e4e6;
+  --bs-btn-disabled-color: #b0b3b3;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #e4e4e6;
+}
+
+/* Rule: 2.1 — bg-primary / text-primary 유틸리티 오버라이드 */
+.bg-primary {
+  background-color: #5cc29b !important;
+}
+.text-primary {
+  color: #5cc29b !important;
+}
+.border-primary {
+  border-color: #5cc29b !important;
+}
+
+/* Rule: 2.1 — 폼 포커스 : Teal 링 */
+.form-control:focus,
+.form-select:focus {
+  border-color: #5cc29b;
+  box-shadow: 0 0 0 0.2rem rgba(92, 194, 155, 0.2);
+}
+
+/* Rule: 2.1 — 체크박스/라디오 활성 색상 */
+.form-check-input:checked {
+  background-color: #5cc29b;
+  border-color: #5cc29b;
+}
+.form-check-input:focus {
+  border-color: #5cc29b;
+  box-shadow: 0 0 0 0.2rem rgba(92, 194, 155, 0.2);
+}
+
+/* Rule: 2.1 — 테이블 호버 : primary-50 */
+.table-hover > tbody > tr:hover > * {
+  --bs-table-hover-bg: #ebf9f5;
+  background-color: #ebf9f5;
+}
+
+/* ── 레이아웃 ── */
 html,
 body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: #e8e8f0;
+  background: #ececee; /* gray-010 */
+  overflow: hidden;
 }
 
 #root {
@@ -12,110 +127,164 @@ body {
 
 #app-wrapper {
   max-width: 450px;
-  min-height: 100vh;
+  height: 100vh;
   margin: 0 auto;
   background: #fff;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.12);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
+/* ── Navbar ── */
 #navbar-area {
   flex-shrink: 0;
   background: #fff;
-  border-bottom: 2px solid #dee2e6;
+  border-bottom: 1px solid #e4e4e6; /* gray-020 */
 }
 
+/* Rule: 2.1 — 탭 내비게이션 */
 .app-nav .nav-link {
-  font-size: 0.8rem;
-  padding: 0.55rem 0.5rem;
-  color: #6c757d;
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.6rem 0.5rem;
+  color: #8d9292; /* gray-060 */
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2px;
   cursor: pointer;
   text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease;
 }
 
 .app-nav .nav-link i {
   font-size: 1.1rem;
 }
 
+/* Rule: 2.1 — 활성 탭 : primary Teal */
 .app-nav .nav-link.active {
-  color: #0d6efd;
+  color: #5cc29b;
   font-weight: 700;
-  border-bottom: 2px solid #0d6efd;
+  border-bottom: 2px solid #5cc29b;
 }
 
-.app-nav .nav-link:hover {
-  color: #0d6efd;
+.app-nav .nav-link:hover:not(.active) {
+  color: #4ab08a;
 }
 
+/* ── 페이지 콘텐츠 ── */
 #page-content {
   flex: 1;
   overflow-y: auto;
-  padding: 0.75rem;
+  padding: 0.875rem;
 }
 
+/* Rule: 2.2 — 페이지 헤더 */
 .page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.875rem;
 }
 
 .page-header h6 {
   margin: 0;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 1rem;
+  color: #272929; /* gray-090 */
 }
 
+/* Rule: 2.2 — 테이블 타이포그래피 */
 .table thead th {
   font-size: 0.75rem;
+  font-weight: 700;
+  color: #696d6d; /* gray-070 */
   white-space: nowrap;
   vertical-align: middle;
+  background-color: #f6f6f7; /* gray-005 */
+  border-bottom-color: #e4e4e6;
 }
 
 .table tbody td {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
+  color: #3f4141; /* gray-080 */
   vertical-align: middle;
 }
 
+/* ── Empty State ── */
 .empty-state {
   text-align: center;
   padding: 3rem 1rem;
-  color: #adb5bd;
+  color: #b0b3b3; /* gray-050 */
 }
 
 .empty-state i {
   font-size: 2.8rem;
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.625rem;
 }
 
 .empty-state p {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
+  margin: 0;
+  color: #8d9292; /* gray-060 */
+}
+
+/* ── Badge ── */
+/* Rule: 2.2 — 배지 기본 크기 상향 */
+.badge {
+  font-size: 0.8rem;
+  padding: 0.35em 0.65em;
+  border-radius: 6px; /* Rule: 2.3.3 — Level 4 */
 }
 
 .badge-sm {
-  font-size: 0.68rem;
+  font-size: 0.75rem;
+  padding: 0.28em 0.55em;
 }
 
+/* ── 테이블 보조 텍스트 ── */
+.td-date {
+  font-size: 0.72rem;
+  color: #696d6d; /* gray-070 */
+  white-space: nowrap;
+}
+
+.td-sub {
+  font-size: 0.72rem;
+}
+
+/* ── 필터 바 ── */
 .filter-bar {
-  background: #f8f9fa;
-  border-radius: 6px;
-  padding: 0.5rem;
-  margin-bottom: 0.75rem;
+  background: #f6f6f7; /* gray-005 */
+  border-radius: 10px; /* Level 2 */
+  padding: 0.625rem;
+  margin-bottom: 0.875rem;
+  border: 1px solid #ececee;
 }
 
-/* 앱 로고 헤더 */
+/* ── 통계 카드 라벨 ── */
+/* Rule: 2.2 — 카드 라벨 텍스트 */
+.stats-card-label {
+  font-size: 0.75rem;
+  color: #696d6d; /* gray-070 */
+  margin-top: 0.125rem;
+}
+
+/* Rule: 2.2 — 테이블 단위 열 */
+.th-narrow {
+  width: 52px;
+}
+
+/* ── 앱 브랜드 헤더 ── */
 .app-brand {
   display: flex;
   align-items: center;
   gap: 0.4rem;
   padding: 0.4rem 0.75rem;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #ececee;
   background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%);
 }
 
@@ -133,4 +302,70 @@ body {
 /* 데이터 새로고침 상태 */
 .refresh-badge {
   font-size: 0.65rem;
+}
+
+/* ── 부모인자 트리 카드 ── */
+.factor-card {
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 6px 5px 5px;
+  text-align: center;
+  flex: 1;
+  min-width: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.factor-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 38px;
+  background: linear-gradient(160deg, #8bc34a, #4caf50);
+  clip-path: polygon(50% 0%, 100% 30%, 100% 100%, 0% 100%, 0% 30%);
+  color: white;
+  font-size: 1rem;
+  margin-bottom: 4px;
+  padding-top: 6px;
+}
+
+.factor-title {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 3px;
+  white-space: nowrap;
+}
+
+.factor-name-display {
+  font-size: 0.72rem;
+  color: #5c35a0;
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.factor-input {
+  font-size: 0.68rem !important;
+  padding: 2px 4px !important;
+  height: auto !important;
+}
+
+.factor-link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: #5c35a0;
+  border: 1px solid #5c35a0;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  text-decoration: none;
+}
+
+.factor-link-btn:hover {
+  background: #5c35a0;
+  color: #fff;
 }

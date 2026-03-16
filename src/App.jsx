@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Training from "./pages/Training";
-import Characters from "./pages/Characters";
 import Racetracks from "./pages/Racetracks";
 import Stats from "./pages/Stats";
+import WantedUma from "./pages/WantedUma";
 import { ToastProvider } from "./context/ToastContext";
 
-const PAGES = { training: Training, stats: Stats, racetracks: Racetracks, characters: Characters };
+const PAGES = { training: Training, stats: Stats, racetracks: Racetracks, wanteduma: WantedUma };
 
 export default function App() {
   const [page, setPage] = useState(() => {
@@ -33,10 +33,6 @@ export default function App() {
   return (
     <ToastProvider>
       <div id="app-wrapper">
-        <div className="app-brand">
-          <img src="./favicon.svg" alt="logo" />
-          <span>우마무스메 육성 기록</span>
-        </div>
         <Navbar currentPage={page} onNavigate={navigate} />
         <div id="page-content">
           <PageComponent />

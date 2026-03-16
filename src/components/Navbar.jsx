@@ -1,8 +1,10 @@
+import { ClipboardList, BarChart2, Flag, Users } from "lucide-react";
+
 const TABS = [
-  { id: "training", icon: "bi-journal-text", label: "훈련기록", color: "text-warning" },
-  { id: "stats", icon: "bi-bar-chart-fill", label: "통계", color: "text-danger" },
-  { id: "racetracks", icon: "bi-flag-fill", label: "마장", color: "text-primary" },
-  { id: "characters", icon: "bi-person-fill", label: "우마무스메", color: "text-success" },
+  { id: "training", Icon: ClipboardList, label: "훈련기록", color: "text-warning" },
+  { id: "stats", Icon: BarChart2, label: "통계", color: "text-danger" },
+  { id: "racetracks", Icon: Flag, label: "마장", color: "text-primary" },
+  { id: "wanteduma", Icon: Users, label: "출주희망", color: "text-success" },
 ];
 
 export default function Navbar({ currentPage, onNavigate }) {
@@ -19,7 +21,7 @@ export default function Navbar({ currentPage, onNavigate }) {
                 onNavigate(tab.id);
               }}
             >
-              <i className={`bi ${tab.icon} ${tab.color}`}></i>
+              <tab.Icon size={16} className={tab.color} />
               <span>{tab.label}</span>
             </a>
           </li>
