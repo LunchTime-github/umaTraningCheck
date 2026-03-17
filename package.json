@@ -1,11 +1,12 @@
 {
   "name": "umatraningcheck",
   "version": "2.0.0",
-  "description": "우마무스메 육성 기록 앱",
+  "description": "우마 플래너",
   "main": "main.js",
   "scripts": {
     "dev": "concurrently \"vite build --watch --mode development\" \"wait-on dist/renderer/index.html && electron . --dev\"",
     "start": "vite build && electron .",
+    "prebuild": "node -e \"['racetracks','records'].forEach(k=>{const f=require('path').join(__dirname,'data',k+'.json');require('fs').writeFileSync(f,'[]','utf-8');console.log('cleared:',f)})\"",
     "build": "vite build && electron-builder",
     "vite:dev": "vite"
   },
@@ -15,7 +16,7 @@
     "electron",
     "react"
   ],
-  "author": "",
+  "author": "uma-trainer",
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^5.3.3",
@@ -25,7 +26,8 @@
     "pretendard": "^1.3.9",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "sweetalert2": "^11.26.23"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
@@ -37,18 +39,23 @@
   },
   "build": {
     "appId": "com.umatraining.check",
-    "productName": "우마무스메 육성 기록",
+    "productName": "우마 플래너",
+    "copyright": "Copyright © 2025 uma-trainer",
+    "asar": false,
+    "electronDist": "node_modules/electron/dist",
     "files": [
       "dist/renderer/**",
       "main.js",
       "preload.js",
-      "data/**"
+      "build/icon.png"
     ],
     "directories": {
       "output": "dist/app"
     },
     "win": {
-      "target": "nsis"
+      "target": "dir",
+      "icon": "build/icon.png",
+      "requestedExecutionLevel": "asInvoker"
     },
     "mac": {
       "target": "dmg"

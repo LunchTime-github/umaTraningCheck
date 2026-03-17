@@ -1,7 +1,11 @@
+// Rule: 3.2.5 Custom Date Input
+// Rule: 3.0 커스텀 Alert
 import { useState, useEffect } from "react";
 import { useStore } from "../hooks/useStore";
 import { useToast } from "../context/ToastContext";
 import { getDistanceCategory } from "../utils";
+import { confirmDelete } from "../utils/swal";
+import DatePicker from "../components/DatePicker";
 import {
   Flag,
   ExternalLink,
@@ -44,11 +48,40 @@ const RACECOURSE_NAMES = [
   "델 마",
 ];
 
-const DISTANCES = Array.from({ length: (5000 - 800) / 100 + 1 }, (_, i) => 800 + i * 100);
+// Rule: 거리 입력 범위 (number input)
+const DISTANCE_MIN = 800;
+const DISTANCE_MAX = 4000;
 
 const WEATHER_OPTIONS = ["맑음", "흐림", "비오는 날", "눈오는 날"];
 const CONDITION_OPTIONS = ["양호", "다습", "포화", "불량"];
 const RUN_STYLES = ["도주", "선행", "선입", "추입"];
+const SEASON_OPTIONS = ["봄", "여름", "가을", "겨울"];
+
+// ── 뱃지 색상 매핑 ──
+const DIST_BADGE = {
+  단거리: "badge-dist-short",
+  마일: "badge-dist-mile",
+  중거리: "badge-dist-middle",
+  장거리: "badge-dist-long",
+};
+const DIR_BADGE = { 시계: "badge-dir-cw", 반시계: "badge-dir-ccw" };
+const WEATHER_BADGE = {
+  맑음: "badge-weather-sunny",
+  흐림: "badge-weather-cloudy",
+  "비오는 날": "badge-weather-rainy",
+  "눈오는 날": "badge-weather-snowy",
+};
+const CONDITION_BADGE = {
+  양호: "badge-cond-good",
+  다습: "badge-cond-damp",
+  포화: "badge-cond-sat",
+  불량: "badge-cond-bad",
+};
+const TIME_BADGE = { 낮: "badge-time-day", 밤: "badge-time-night" };
+const SURFACE_BADGE = { 잔디: "badge-surf-turf", 더트: "badge-surf-dirt" };
+function distBadgeClass(dist) {
+  return DIST_BADGE[getDistanceCategory(dist)] || "bg-secondary";
+}
 
 function makeEmptyUma() {
   return {
@@ -88,8 +121,8 @@ function getUmaList(rt) {
 
 const EMPTY_FORM = {
   type: "챔피언스미팅",
+  season: "봄",
   startDate: "",
-  endDate: "",
   racecourse: "",
   surface: "잔디",
   distance: "",
@@ -101,6 +134,7 @@ const EMPTY_FORM = {
 
 export default function Racetracks() {
   const { data, load, add, remove, update } = useStore("racetracks");
+  const { data: records, load: loadRecords } = useStore("records");
   const toast = useToast();
   const [showModal, setShowModal] = useState(false);
   const [form, setForm] = useState(EMPTY_FORM);
@@ -113,6 +147,7 @@ export default function Racetracks() {
 
   useEffect(() => {
     load();
+    loadRecords();
   }, []);
 
   // data 변경 시 selectedRt 동기화
@@ -136,19 +171,20 @@ export default function Racetracks() {
       toast("경기장명을 선택하세요.", "warning");
       return;
     }
-    if (!form.distance) {
-      toast("거리를 선택하세요.", "warning");
+    const distNum = parseInt(form.distance, 10);
+    if (!form.distance || isNaN(distNum) || distNum < DISTANCE_MIN || distNum > DISTANCE_MAX) {
+      toast(`거리를 ${DISTANCE_MIN}~${DISTANCE_MAX} 사이로 입력하세요.`, "warning");
       return;
     }
-    if (!form.startDate || !form.endDate) {
-      toast("기간을 입력하세요.", "warning");
+    if (!form.startDate) {
+      toast("시작일을 입력하세요.", "warning");
       return;
     }
 
     await add({
       type: form.type,
+      season: form.season,
       startDate: form.startDate,
-      endDate: form.endDate,
       racecourse: form.racecourse,
       surface: form.surface,
       distance: parseInt(form.distance),
@@ -164,7 +200,12 @@ export default function Racetracks() {
   };
 
   const handleDelete = async (id) => {
-    if (!confirm("이 마장을 삭제하시겠습니까?")) return;
+    const hasRecords = records.some((r) => r.racetracksId === id);
+    if (hasRecords) {
+      toast("훈련기록이 존재하는 마장은 삭제할 수 없습니다.", "warning");
+      return;
+    }
+    if (!(await confirmDelete("이 마장을 삭제하시겠습니까?"))) return;
     await remove(id);
     if (selectedRt?.id === id) setSelectedRt(null);
     toast("삭제되었습니다.", "info");
@@ -197,7 +238,7 @@ export default function Racetracks() {
   };
 
   const handleUmaDelete = async (idx) => {
-    if (!confirm("이 우마무스메를 삭제하시겠습니까?")) return;
+    if (!(await confirmDelete("이 우마무스메를 삭제하시겠습니까?"))) return;
     const list = getUmaList(selectedRt);
     list[idx] = makeEmptyUma();
     await update(selectedRt.id, { ...selectedRt, umaList: list });
@@ -271,7 +312,8 @@ export default function Racetracks() {
               <tr>
                 <th>종류</th>
                 <th>경기장</th>
-                <th>기간</th>
+                <th>계절</th>
+                <th>시작일</th>
                 <th>마장</th>
                 <th>거리</th>
                 <th></th>
@@ -286,14 +328,14 @@ export default function Racetracks() {
                     </span>
                   </td>
                   <td>{rt.racecourse}</td>
-                  <td className="td-date">
-                    {rt.startDate}
-                    <br />~{rt.endDate}
-                  </td>
+                  <td>{rt.season || "-"}</td>
+                  <td className="td-date">{rt.startDate}</td>
                   <td>{rt.surface}</td>
                   <td>
                     {rt.distance}m<br />
-                    <span className="text-muted td-sub">{getDistanceCategory(rt.distance)}</span>
+                    <span className={`badge badge-sm text-nowrap ${distBadgeClass(rt.distance)}`}>
+                      {getDistanceCategory(rt.distance)}
+                    </span>
                   </td>
                   <td onClick={(e) => e.stopPropagation()}>
                     <button className="btn btn-outline-danger btn-sm py-0 px-1" onClick={() => handleDelete(rt.id)}>
@@ -347,25 +389,36 @@ export default function Racetracks() {
                     ))}
                   </div>
                 </div>
-                <div className="row g-2 mb-3">
-                  <div className="col-6">
-                    <label className="form-label fw-semibold small">시작일</label>
-                    <input
-                      type="date"
-                      className="form-control form-control-sm"
-                      value={form.startDate}
-                      onChange={(e) => setForm({ ...form, startDate: e.target.value })}
-                    />
+                <div className="mb-3">
+                  <label className="form-label fw-semibold small">
+                    계절 <span className="text-danger">*</span>
+                  </label>
+                  <div className="d-flex gap-3">
+                    {SEASON_OPTIONS.map((s) => (
+                      <div key={s} className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          id={`season-${s}`}
+                          value={s}
+                          checked={form.season === s}
+                          onChange={() => setForm({ ...form, season: s })}
+                        />
+                        <label className="form-check-label small" htmlFor={`season-${s}`}>
+                          {s}
+                        </label>
+                      </div>
+                    ))}
                   </div>
-                  <div className="col-6">
-                    <label className="form-label fw-semibold small">종료일</label>
-                    <input
-                      type="date"
-                      className="form-control form-control-sm"
-                      value={form.endDate}
-                      onChange={(e) => setForm({ ...form, endDate: e.target.value })}
-                    />
-                  </div>
+                </div>
+                {/* Rule: 3.2.5 — Custom Date Input */}
+                <div className="mb-3">
+                  <label className="form-label fw-semibold small">시작일</label>
+                  <DatePicker
+                    value={form.startDate}
+                    onChange={(v) => setForm({ ...form, startDate: v })}
+                    placeholder="날짜 선택"
+                  />
                 </div>
                 {/* 경기장명 */}
                 <div className="mb-3">
@@ -406,27 +459,39 @@ export default function Racetracks() {
                     ))}
                   </div>
                 </div>
-                {/* 거리 */}
+                {/* 거리 — number input (800~4000) */}
                 <div className="mb-3">
                   <label className="form-label fw-semibold small">
                     거리 <span className="text-danger">*</span>
                   </label>
                   <div className="d-flex gap-2 align-items-center">
-                    <select
-                      className="form-select form-select-sm"
-                      value={form.distance}
-                      onChange={(e) => setForm({ ...form, distance: e.target.value })}
-                    >
-                      <option value="">-- 선택 --</option>
-                      {DISTANCES.map((d) => (
-                        <option key={d} value={d}>
-                          {d}m
-                        </option>
-                      ))}
-                    </select>
-                    {form.distance && (
-                      <span className="badge bg-secondary text-nowrap">{getDistanceCategory(form.distance)}</span>
-                    )}
+                    <div className="input-group input-group-sm" style={{ maxWidth: 160 }}>
+                      <input
+                        type="number"
+                        className="form-control form-control-sm"
+                        min={DISTANCE_MIN}
+                        max={DISTANCE_MAX}
+                        step={100}
+                        placeholder="800 ~ 4000"
+                        value={form.distance}
+                        onChange={(e) => setForm({ ...form, distance: e.target.value })}
+                        onBlur={(e) => {
+                          const raw = e.target.value.trim();
+                          if (!raw) return;
+                          // 1~2자리 구역의 숫자면 뒤에 00 추가
+                          const num = parseInt(raw, 10);
+                          if (!isNaN(num) && raw.length <= 2) {
+                            setForm((prev) => ({ ...prev, distance: String(num * 100) }));
+                          }
+                        }}
+                      />
+                      <span className="input-group-text">m</span>
+                    </div>
+                    {(() => {
+                      const d = parseInt(form.distance, 10);
+                      if (!form.distance || isNaN(d) || d < DISTANCE_MIN || d > DISTANCE_MAX) return null;
+                      return <span className={`badge text-nowrap ${distBadgeClass(d)}`}>{getDistanceCategory(d)}</span>;
+                    })()}
                   </div>
                 </div>
                 {/* 방향 */}
@@ -551,7 +616,8 @@ export default function Racetracks() {
                   <div className="d-flex align-items-center gap-1 text-muted small mb-2 border-bottom pb-1">
                     <Calendar size={12} />
                     <span>
-                      {selectedRt.startDate} ~ {selectedRt.endDate}
+                      {selectedRt.season && `${selectedRt.season} · `}
+                      {selectedRt.startDate}
                     </span>
                   </div>
                   <div className="d-flex flex-wrap gap-1">
@@ -562,29 +628,37 @@ export default function Racetracks() {
                       {selectedRt.type === "챔피언스미팅" ? "챔피언스미팅" : "리그오브히어로즈"}
                     </span>
                     <span
-                      className={`badge d-flex align-items-center gap-1 ${selectedRt.surface === "잔디" ? "bg-success" : "bg-warning text-dark"}`}
+                      className={`badge d-flex align-items-center gap-1 ${SURFACE_BADGE[selectedRt.surface] || "bg-secondary"}`}
                     >
                       <Layers size={10} />
                       {selectedRt.surface}
                     </span>
-                    <span className="badge bg-info d-flex align-items-center gap-1">
+                    <span className={`badge d-flex align-items-center gap-1 ${distBadgeClass(selectedRt.distance)}`}>
                       <Ruler size={10} />
                       {selectedRt.distance}m · {getDistanceCategory(selectedRt.distance)}
                     </span>
-                    <span className="badge bg-secondary d-flex align-items-center gap-1">
+                    <span
+                      className={`badge d-flex align-items-center gap-1 ${DIR_BADGE[selectedRt.direction] || "bg-secondary"}`}
+                    >
                       <RotateCw size={10} />
                       {selectedRt.direction}
                     </span>
-                    <span className="badge bg-secondary d-flex align-items-center gap-1">
+                    <span
+                      className={`badge d-flex align-items-center gap-1 ${WEATHER_BADGE[selectedRt.weather] || "bg-secondary"}`}
+                    >
                       <CloudSun size={10} />
                       {selectedRt.weather}
                     </span>
-                    <span className="badge bg-secondary d-flex align-items-center gap-1">
+                    <span
+                      className={`badge d-flex align-items-center gap-1 ${CONDITION_BADGE[selectedRt.condition] || "bg-secondary"}`}
+                    >
                       <Droplets size={10} />
                       {selectedRt.condition}
                     </span>
                     {selectedRt.time && (
-                      <span className="badge bg-secondary d-flex align-items-center gap-1">
+                      <span
+                        className={`badge d-flex align-items-center gap-1 ${TIME_BADGE[selectedRt.time] || "bg-secondary"}`}
+                      >
                         <Sun size={10} />
                         {selectedRt.time}
                       </span>

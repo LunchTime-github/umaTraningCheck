@@ -1,4 +1,4 @@
-# 우마무스메 육성 기록 앱 - 개발 TODO List
+# 우마 플래너 앱 - 개발 TODO List
 
 > Electron 기반 데스크탑 앱 / 최대 너비 450px / 로컬 데이터 저장
 
@@ -10,6 +10,7 @@
   - `npm init` → `package.json` 구성
   - Electron 설치 (`electron`, `electron-builder`)
 - [ ] **1-2.** 프로젝트 폴더 구조 설계
+
   ```
   /
   ├── main.js             # Electron 메인 프로세스
@@ -25,6 +26,7 @@
   │   └── characters.json # 육성 우마무스메 기록
   └── /assets             # 정적 리소스
   ```
+
 - [ ] **1-3.** Bootstrap 5 통합 (CDN 또는 로컬 번들)
 - [ ] **1-4.** `main.js` 기본 창 설정
   - `width: 450`, `maxWidth: 450`, `resizable: false` (세로는 자유)

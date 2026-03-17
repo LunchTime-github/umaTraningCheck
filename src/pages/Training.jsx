@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useStore } from "../hooks/useStore";
 import { useToast } from "../context/ToastContext";
 import { formatDateTime, formatRacetrackLabel, formatFailureCause, FAILURE_TYPES, CONDITION_TYPES } from "../utils";
+import { confirmDelete } from "../utils/swal";
 import { ClipboardList, Plus, Info, AlertTriangle, Trash2, ArrowUp, ArrowDown } from "lucide-react";
 import Pagination from "../components/Pagination";
 
@@ -182,7 +183,7 @@ export default function Training() {
   };
 
   const handleDelete = async (id) => {
-    if (!confirm("이 기록을 삭제하시겠습니까?")) return;
+    if (!(await confirmDelete("이 기록을 삭제하시겠습니까?"))) return;
     await deleteRecord(id);
     toast("삭제되었습니다.", "info");
   };

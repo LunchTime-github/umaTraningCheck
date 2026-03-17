@@ -33,6 +33,10 @@ export default function App() {
   return (
     <ToastProvider>
       <div id="app-wrapper">
+        <div className="app-brand">
+          <img src="./icon.png" alt="logo" />
+          <span>우마 플래너</span>
+        </div>
         <Navbar currentPage={page} onNavigate={navigate} />
         <div id="page-content">
           <PageComponent />

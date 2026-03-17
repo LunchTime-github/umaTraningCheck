@@ -1,10 +1,13 @@
-﻿const { app, BrowserWindow, ipcMain, shell } = require('electron');
+﻿const { app, BrowserWindow, ipcMain, shell, Menu } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
 const isDev = process.argv.includes('--dev');
 
-const DATA_DIR = path.join(__dirname, 'data');
+// 빌드된 앱(asar)에서는 __dirname이 읽기 전용이므로 userData 경로 사용
+const DATA_DIR = isDev
+  ? path.join(__dirname, 'data')
+  : path.join(app.getPath('userData'), 'data');
 
 
 function ensureDir(dir) {
@@ -37,12 +40,14 @@ function writeStore(key, data) {
 
 
 function createWindow() {
+  Menu.setApplicationMenu(null);
   const win = new BrowserWindow({
-    width: 450,
-    maxWidth: 450,
-    minWidth: 450,
+    width: 460,
+    minWidth: 460,
     height: 750,
-    resizable: false,
+    resizable: true,
+    autoHideMenuBar: true,
+    icon: path.join(__dirname, 'build', 'icon.png'),
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: false,
@@ -51,7 +56,10 @@ function createWindow() {
   });
 
   win.loadFile(path.join(__dirname, 'dist', 'renderer', 'index.html'));
-  win.webContents.openDevTools({ mode: 'detach' });
+
+  if (isDev) {
+    win.webContents.openDevTools({ mode: 'detach' });
+  }
 
   // dev 모드에서 dist/renderer 변경 감지 → 자동 리로드
   if (isDev) {

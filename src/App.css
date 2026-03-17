@@ -140,7 +140,6 @@ body {
 #navbar-area {
   flex-shrink: 0;
   background: #fff;
-  border-bottom: 1px solid #e4e4e6; /* gray-020 */
 }
 
 /* Rule: 2.1 — 탭 내비게이션 */
@@ -280,23 +279,25 @@ body {
 
 /* ── 앱 브랜드 헤더 ── */
 .app-brand {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.4rem 0.75rem;
-  border-bottom: 1px solid #ececee;
-  background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%);
+  gap: 0.5rem;
+  padding: 0.55rem 0.875rem;
+  border-bottom: 1px solid #e4e4e6; /* gray-020 */
+  background: #fff;
 }
 
 .app-brand img {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
 .app-brand span {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  color: #7b1fa2;
+  color: #272929; /* gray-090 */
 }
 
 /* 데이터 새로고침 상태 */
@@ -368,4 +369,128 @@ body {
 .factor-link-btn:hover {
   background: #5c35a0;
   color: #fff;
+}
+
+/* ── SweetAlert2 앱 테마 ── */
+.swal-app-popup {
+  border-radius: 16px !important; /* Rule: 2.3.3 Level 1 */
+  font-family: "Pretendard Variable", Pretendard, sans-serif !important;
+  padding: 1.25rem 1.5rem !important;
+  max-width: 300px !important;
+}
+
+/* 아이콘 크기 축소 */
+.swal-app-popup .swal2-icon {
+  width: 38px !important;
+  height: 38px !important;
+  margin: 0 auto 0.75rem !important;
+  font-size: 0.85rem !important;
+}
+
+.swal-app-popup .swal2-icon .swal2-icon-content {
+  font-size: 1.4rem !important;
+}
+
+.swal-app-title {
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  color: #272929 !important;
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+  line-height: 1.3 !important;
+}
+
+.swal-app-text {
+  font-size: 0.82rem !important;
+  color: #696d6d !important;
+  margin-top: 0.375rem !important;
+}
+
+.swal-app-actions {
+  margin-top: 1rem !important;
+  gap: 0.5rem !important;
+}
+
+/* ── 거리 카테고리 뱃지 ── */
+.badge-dist-short {
+  background-color: #e11d48 !important;
+  color: #fff !important;
+}
+.badge-dist-mile {
+  background-color: #059669 !important;
+  color: #fff !important;
+}
+.badge-dist-middle {
+  background-color: #ea580c !important;
+  color: #fff !important;
+}
+.badge-dist-long {
+  background-color: #2563eb !important;
+  color: #fff !important;
+}
+
+/* ── 방향 뱃지 ── */
+.badge-dir-cw {
+  background-color: #7c3aed !important;
+  color: #fff !important;
+}
+.badge-dir-ccw {
+  background-color: #be185d !important;
+  color: #fff !important;
+}
+
+/* ── 날씨 뱃지 ── */
+.badge-weather-sunny {
+  background-color: #d97706 !important;
+  color: #fff !important;
+}
+.badge-weather-cloudy {
+  background-color: #6b7280 !important;
+  color: #fff !important;
+}
+.badge-weather-rainy {
+  background-color: #0369a1 !important;
+  color: #fff !important;
+}
+.badge-weather-snowy {
+  background-color: #4338ca !important;
+  color: #fff !important;
+}
+
+/* ── 마장 상태 뱃지 ── */
+.badge-cond-good {
+  background-color: #15803d !important;
+  color: #fff !important;
+}
+.badge-cond-damp {
+  background-color: #0891b2 !important;
+  color: #fff !important;
+}
+.badge-cond-sat {
+  background-color: #1d4ed8 !important;
+  color: #fff !important;
+}
+.badge-cond-bad {
+  background-color: #dc2626 !important;
+  color: #fff !important;
+}
+
+/* ── 시간 뱃지 ── */
+.badge-time-day {
+  background-color: #b45309 !important;
+  color: #fff !important;
+}
+.badge-time-night {
+  background-color: #1e293b !important;
+  color: #fff !important;
+}
+
+/* ── 노면 뱃지 ── */
+.badge-surf-turf {
+  background-color: #15803d !important;
+  color: #fff !important;
+}
+.badge-surf-dirt {
+  background-color: #78350f !important;
+  color: #fff !important;
 }
