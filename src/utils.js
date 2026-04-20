@@ -41,6 +41,8 @@ export function formatFailureCause(fc) {
     case '시나리오조건미달': return '시나리오 조건 미달';
     case '수완가미획득': return '수완가 미획득';
     case '고유스킬진화실패': return '고유스킬 진화 실패';
+    case '세침사': return '세침사';
+    case '기타': return fc.detail ? `기타 (${fc.detail})` : '기타';
     default: return fc.type || '-';
   }
 }
@@ -51,7 +53,11 @@ export const FAILURE_TYPES = [
   { value: '스킬미획득', label: '스킬 미획득' },
   { value: '스탯미달', label: '육성 스탯 미달' },
   { value: '상태이상', label: '상태이상' },
-  { value: '시나리오조건미달', label: '시나리오 조건 미달' },  { value: '수완가미획득', label: '수완가 미획득' },
-  { value: '고유스킬진화실패', label: '고유스킬 진화 실패' },]
+  { value: '세침사', label: '세침사' },
+  { value: '시나리오조건미달', label: '시나리오 조건 미달' },
+  { value: '수완가미획득', label: '수완가 미획득' },
+  { value: '고유스킬진화실패', label: '고유스킬 진화 실패' },
+  { value: '기타', label: '기타' },
+]
 
-export const CONDITION_TYPES = ['땡땡이 기질', '밤샘 상태', '살찜 주의', '세침사']
+export const CONDITION_TYPES = ['땡땡이 기질', '밤샘 상태', '살찜 주의', '편두통', '피부트러블']

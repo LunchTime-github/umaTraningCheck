@@ -1,6 +1,6 @@
 {
-  "name": "umatraningcheck",
-  "version": "2.0.0",
+  "name": "uma-planner",
+  "version": "2.1.0",
   "description": "우마 플래너",
   "main": "main.js",
   "scripts": {
@@ -55,7 +55,9 @@
     "win": {
       "target": "dir",
       "icon": "build/icon.png",
-      "requestedExecutionLevel": "asInvoker"
+      "requestedExecutionLevel": "asInvoker",
+      "signAndEditExecutable": false,
+      "forceCodeSigning": false
     },
     "mac": {
       "target": "dmg"

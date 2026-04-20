@@ -4,9 +4,10 @@ import Training from "./pages/Training";
 import Racetracks from "./pages/Racetracks";
 import Stats from "./pages/Stats";
 import WantedUma from "./pages/WantedUma";
+import SettingsPage from "./pages/Settings";
 import { ToastProvider } from "./context/ToastContext";
 
-const PAGES = { training: Training, stats: Stats, racetracks: Racetracks, wanteduma: WantedUma };
+const PAGES = { training: Training, stats: Stats, racetracks: Racetracks, wanteduma: WantedUma, settings: SettingsPage };
 
 export default function App() {
   const [page, setPage] = useState(() => {

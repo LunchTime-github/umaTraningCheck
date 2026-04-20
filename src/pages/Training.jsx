@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useStore } from "../hooks/useStore";
 import { useToast } from "../context/ToastContext";
 import { formatDateTime, formatRacetrackLabel, formatFailureCause, FAILURE_TYPES, CONDITION_TYPES } from "../utils";
@@ -49,8 +49,9 @@ export default function Training() {
   const [memo, setMemo] = useState("");
   const lastInputRef = useRef({ racetracksId: "", umaName: "" });
   const [failCauseType, setFailCauseType] = useState("");
-  const [failProb, setFailProb] = useState("");
+  const [failProb, setFailProb] = useState("50");
   const [condType, setCondType] = useState("");
+  const [failOtherText, setFailOtherText] = useState("");
   const [editingId, setEditingId] = useState(null);
 
   useEffect(() => {
@@ -93,8 +94,9 @@ export default function Training() {
     setRank("");
     setMemo("");
     setFailCauseType("");
-    setFailProb("");
+    setFailProb("50");
     setCondType("");
+    setFailOtherText("");
   };
 
   const openModal = () => {
@@ -125,12 +127,14 @@ export default function Training() {
     setMemo(r.memo || "");
     if (r.failureCause) {
       setFailCauseType(r.failureCause.type || "");
-      setFailProb(r.failureCause.trainingFailProb?.toString() || "");
+      setFailProb(r.failureCause.trainingFailProb?.toString() || "50");
       setCondType(r.failureCause.conditionType || "");
+      setFailOtherText(r.failureCause.detail || "");
     } else {
       setFailCauseType("");
-      setFailProb("");
+      setFailProb("50");
       setCondType("");
+      setFailOtherText("");
     }
     setShowModal(true);
   };
@@ -163,6 +167,7 @@ export default function Training() {
       const failureCause = { type: failCauseType };
       if (failCauseType === "훈련실패") failureCause.trainingFailProb = failProb;
       if (failCauseType === "상태이상") failureCause.conditionType = condType;
+      if (failCauseType === "기타") failureCause.detail = failOtherText;
       payload.failureCause = failureCause;
       payload.rank = null;
       payload.memo = null;
@@ -419,21 +424,26 @@ export default function Training() {
                   </label>
                   <div className="d-flex gap-3">
                     {["완주", "미완주"].map((rv) => (
-                      <div key={rv} className="form-check">
+                      <div
+                        key={rv}
+                        className="form-check"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                          setForm({ ...form, result: rv });
+                          setFailCauseType("");
+                          setRank("");
+                          setMemo("");
+                        }}
+                      >
                         <input
                           className="form-check-input"
                           type="radio"
                           id={`result-${rv}`}
                           value={rv}
                           checked={form.result === rv}
-                          onChange={() => {
-                            setForm({ ...form, result: rv });
-                            setFailCauseType("");
-                            setRank("");
-                            setMemo("");
-                          }}
+                          onChange={() => {}}
                         />
-                        <label className="form-check-label small" htmlFor={`result-${rv}`}>
+                        <label className="form-check-label small" htmlFor={`result-${rv}`} style={{ cursor: "pointer" }}>
                           {rv}
                         </label>
                       </div>
@@ -471,51 +481,74 @@ export default function Training() {
                     </label>
                     <div className="border rounded p-2">
                       {FAILURE_TYPES.map((ft) => (
-                        <div key={ft.value} className="form-check">
-                          <input
-                            className="form-check-input"
-                            type="radio"
-                            id={`ft-${ft.value}`}
-                            value={ft.value}
-                            checked={failCauseType === ft.value}
-                            onChange={() => setFailCauseType(ft.value)}
-                          />
-                          <label className="form-check-label small" htmlFor={`ft-${ft.value}`}>
-                            {ft.label}
-                          </label>
-                        </div>
-                      ))}
-                      {failCauseType === "훈련실패" && (
-                        <div className="mt-2 ms-3">
-                          <label className="form-label small mb-1">실패 확률 (%)</label>
-                          <input
-                            type="number"
-                            className="form-control form-control-sm"
-                            min="0"
-                            max="100"
-                            value={failProb}
-                            onChange={(e) => setFailProb(e.target.value)}
-                            placeholder="0~100"
-                          />
-                        </div>
-                      )}
-                      {failCauseType === "상태이상" && (
-                        <div className="mt-2 ms-3">
-                          <label className="form-label small mb-1">상태이상 종류</label>
-                          <select
-                            className="form-select form-select-sm"
-                            value={condType}
-                            onChange={(e) => setCondType(e.target.value)}
+                        <React.Fragment key={ft.value}>
+                          <div
+                            className="form-check"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => setFailCauseType(ft.value)}
                           >
-                            <option value="">선택하세요</option>
-                            {CONDITION_TYPES.map((ct) => (
-                              <option key={ct} value={ct}>
-                                {ct}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-                      )}
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              id={`ft-${ft.value}`}
+                              value={ft.value}
+                              checked={failCauseType === ft.value}
+                              onChange={() => {}}
+                            />
+                            <label className="form-check-label small" htmlFor={`ft-${ft.value}`} style={{ cursor: "pointer" }}>
+                              {ft.label}
+                            </label>
+                          </div>
+                          {failCauseType === ft.value && ft.value === "훈련실패" && (
+                            <div className="mt-1 mb-2 ms-3">
+                              <label className="form-label small mb-1">
+                                실패 확률: <strong>{failProb}%</strong>
+                              </label>
+                              <input
+                                type="range"
+                                className="custom-range"
+                                min="0"
+                                max="100"
+                                step="1"
+                                value={failProb}
+                                onChange={(e) => setFailProb(e.target.value)}
+                              />
+                              <div className="d-flex justify-content-between" style={{ fontSize: "0.7rem", color: "#8d9292" }}>
+                                <span>0%</span><span>50%</span><span>100%</span>
+                              </div>
+                            </div>
+                          )}
+                          {failCauseType === ft.value && ft.value === "상태이상" && (
+                            <div className="mt-1 mb-2 ms-3">
+                              <label className="form-label small mb-1">상태이상 종류</label>
+                              <select
+                                className="form-select form-select-sm"
+                                value={condType}
+                                onChange={(e) => setCondType(e.target.value)}
+                              >
+                                <option value="">선택하세요</option>
+                                {CONDITION_TYPES.map((ct) => (
+                                  <option key={ct} value={ct}>
+                                    {ct}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          )}
+                          {failCauseType === ft.value && ft.value === "기타" && (
+                            <div className="mt-1 mb-2 ms-3">
+                              <label className="form-label small mb-1">상세 내용 (선택)</label>
+                              <input
+                                type="text"
+                                className="form-control form-control-sm"
+                                value={failOtherText}
+                                onChange={(e) => setFailOtherText(e.target.value)}
+                                placeholder="원인을 입력하세요"
+                              />
+                            </div>
+                          )}
+                        </React.Fragment>
+                      ))}
                     </div>
                   </div>
                 )}

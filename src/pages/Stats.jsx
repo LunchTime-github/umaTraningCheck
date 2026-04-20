@@ -19,6 +19,7 @@ export default function Stats() {
   const { data: records, load: loadRecords } = useStore("records");
   const { data: racetracks, load: loadRacetracks } = useStore("racetracks");
   const { data: characters, load: loadCharacters } = useStore("characters");
+  const [filterType, setFilterType] = useState("");
   const [filterRtId, setFilterRtId] = useState("");
   const [filterUmaName, setFilterUmaName] = useState("");
   const [causeTypeFilter, setCauseTypeFilter] = useState("");
@@ -29,15 +30,26 @@ export default function Stats() {
     loadCharacters();
   }, []);
 
-  // umaName 목록 (records + characters 합산)
-  const allUmaNames = [
-    ...new Set([
-      ...records.map((r) => r.umaName || characters.find((c) => c.id === r.characterId)?.name).filter(Boolean),
-      ...characters.map((c) => c.name),
-    ]),
-  ].sort();
+  // 마장 선택 시 해당 마장 우마무스메만, 아니면 전체 records+characters 합산
+  const allUmaNames = (() => {
+    if (filterRtId) {
+      const rt = racetracks.find((r) => r.id === filterRtId);
+      return (rt?.umaList || []).filter((u) => u.name).map((u) => u.name).sort();
+    }
+    return [
+      ...new Set([
+        ...records.map((r) => r.umaName || characters.find((c) => c.id === r.characterId)?.name).filter(Boolean),
+        ...characters.map((c) => c.name),
+      ]),
+    ].sort();
+  })();
 
   const filtered = records.filter((r) => {
+    if (filterType) {
+      const typeLabel = filterType === "챔미" ? "챔피언스미팅" : "리그오브히어로즈";
+      const rt = racetracks.find((x) => x.id === r.racetracksId);
+      if (!rt || rt.type !== typeLabel) return false;
+    }
     if (filterRtId && r.racetracksId !== filterRtId) return false;
     if (filterUmaName) {
       const name = r.umaName || characters.find((c) => c.id === r.characterId)?.name;
@@ -52,10 +64,14 @@ export default function Stats() {
   const incompleteCount = incompleteRecords.length;
   const completeRate = filtered.length > 0 ? Math.round((completeCount / filtered.length) * 100) : 0;
 
-  // 미완주 원인 분포
+  // 미완주 원인 분포 (훈련실패는 확률 상관없이 하나로 묶기)
   const causeCounts = {};
   incompleteRecords.forEach((r) => {
-    const label = r.failureCause ? formatFailureCause(r.failureCause) : "원인 미상";
+    const label = !r.failureCause
+      ? "원인 미상"
+      : r.failureCause.type === "훈련실패"
+      ? "훈련실패"
+      : formatFailureCause(r.failureCause);
     causeCounts[label] = (causeCounts[label] || 0) + 1;
   });
   const causeLabels = Object.keys(causeCounts);
@@ -74,14 +90,24 @@ export default function Stats() {
   const filteredCauseEntries = Object.entries(causeCountsFiltered).sort((a, b) => b[1] - a[1]);
   const filteredCauseTotal = filteredCauseEntries.reduce((s, [, c]) => s + c, 0);
 
-  // 훈련실패 확률 분포
-  const probBuckets = { "0-20%": 0, "21-40%": 0, "41-60%": 0, "61-80%": 0, "81-100%": 0 };
+  // 훈련실패 확률 분포 (40% 이하 5% 단위, 초과 20% 단위)
+  const probBuckets = {
+    "0-5%": 0, "6-10%": 0, "11-15%": 0, "16-20%": 0,
+    "21-25%": 0, "26-30%": 0, "31-35%": 0, "36-40%": 0,
+    "41-60%": 0, "61-80%": 0, "81-100%": 0,
+  };
   incompleteRecords
     .filter((r) => r.failureCause?.type === "훈련실패" && r.failureCause?.trainingFailProb != null)
     .forEach((r) => {
       const p = parseInt(r.failureCause.trainingFailProb);
-      if (p <= 20) probBuckets["0-20%"]++;
-      else if (p <= 40) probBuckets["21-40%"]++;
+      if (p <= 5) probBuckets["0-5%"]++;
+      else if (p <= 10) probBuckets["6-10%"]++;
+      else if (p <= 15) probBuckets["11-15%"]++;
+      else if (p <= 20) probBuckets["16-20%"]++;
+      else if (p <= 25) probBuckets["21-25%"]++;
+      else if (p <= 30) probBuckets["26-30%"]++;
+      else if (p <= 35) probBuckets["31-35%"]++;
+      else if (p <= 40) probBuckets["36-40%"]++;
       else if (p <= 60) probBuckets["41-60%"]++;
       else if (p <= 80) probBuckets["61-80%"]++;
       else probBuckets["81-100%"]++;
@@ -130,21 +156,34 @@ export default function Stats() {
 
       <div className="filter-bar">
         <div className="row g-1">
-          <div className="col-6">
+          <div className="col-4">
+            <select
+              className="form-select form-select-sm"
+              value={filterType}
+              onChange={(e) => { setFilterType(e.target.value); setFilterRtId(""); setFilterUmaName(""); }}
+            >
+              <option value="">종류 전체</option>
+              <option value="챔미">챔피언스미팅</option>
+              <option value="LoH">리그오브히어로즈</option>
+            </select>
+          </div>
+          <div className="col-8">
             <select
               className="form-select form-select-sm"
               value={filterRtId}
-              onChange={(e) => setFilterRtId(e.target.value)}
+              onChange={(e) => { setFilterRtId(e.target.value); setFilterUmaName(""); }}
             >
               <option value="">마장 전체</option>
-              {racetracks.map((rt) => (
-                <option key={rt.id} value={rt.id}>
-                  {formatRacetrackLabel(rt)}
-                </option>
-              ))}
+              {racetracks
+                .filter((rt) => !filterType || rt.type === (filterType === "챔미" ? "챔피언스미팅" : "리그오브히어로즈"))
+                .map((rt) => (
+                  <option key={rt.id} value={rt.id}>
+                    {formatRacetrackLabel(rt)}
+                  </option>
+                ))}
             </select>
           </div>
-          <div className="col-6">
+          <div className="col-12">
             <select
               className="form-select form-select-sm"
               value={filterUmaName}

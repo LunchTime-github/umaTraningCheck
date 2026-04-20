@@ -1,4 +1,4 @@
-// Rule: 3.2.5 Custom Date Input
+﻿// Rule: 3.2.5 Custom Date Input
 // Rule: 3.0 커스텀 Alert
 import { useState, useEffect } from "react";
 import { useStore } from "../hooks/useStore";
@@ -130,6 +130,7 @@ const EMPTY_FORM = {
   weather: "맑음",
   condition: "양호",
   time: "낮",
+  link: "",
 };
 
 export default function Racetracks() {
@@ -192,6 +193,7 @@ export default function Racetracks() {
       weather: form.weather,
       condition: form.condition,
       time: form.surface === "잔디" ? "낮" : form.time,
+      link: form.link || "",
       umaList: [makeEmptyUma(), makeEmptyUma(), makeEmptyUma()],
     });
     setShowModal(false);
@@ -459,26 +461,38 @@ export default function Racetracks() {
                     ))}
                   </div>
                 </div>
-                {/* 거리 — number input (800~4000) */}
+                {/* 거리 — range + number input (800~4000, 100m 단위) */}
                 <div className="mb-3">
                   <label className="form-label fw-semibold small">
                     거리 <span className="text-danger">*</span>
                   </label>
+                  <input
+                    type="range"
+                    className="custom-range"
+                    min={DISTANCE_MIN}
+                    max={DISTANCE_MAX}
+                    step={100}
+                    value={form.distance || DISTANCE_MIN}
+                    onChange={(e) => setForm({ ...form, distance: e.target.value })}
+                  />
+                  <div className="d-flex justify-content-between mb-2" style={{ fontSize: "0.7rem", color: "#8d9292" }}>
+                    <span>{DISTANCE_MIN}m</span>
+                    <span>{DISTANCE_MAX}m</span>
+                  </div>
                   <div className="d-flex gap-2 align-items-center">
-                    <div className="input-group input-group-sm" style={{ maxWidth: 160 }}>
+                    <div className="input-group input-group-sm" style={{ maxWidth: 120 }}>
                       <input
                         type="number"
                         className="form-control form-control-sm"
                         min={DISTANCE_MIN}
                         max={DISTANCE_MAX}
                         step={100}
-                        placeholder="800 ~ 4000"
+                        placeholder="800~4000"
                         value={form.distance}
                         onChange={(e) => setForm({ ...form, distance: e.target.value })}
                         onBlur={(e) => {
                           const raw = e.target.value.trim();
                           if (!raw) return;
-                          // 1~2자리 구역의 숫자면 뒤에 00 추가
                           const num = parseInt(raw, 10);
                           if (!isNaN(num) && raw.length <= 2) {
                             setForm((prev) => ({ ...prev, distance: String(num * 100) }));
@@ -514,6 +528,17 @@ export default function Racetracks() {
                       </div>
                     ))}
                   </div>
+                </div>
+                {/* 마장 링크 */}
+                <div className="mb-3">
+                  <label className="form-label fw-semibold small">마장 링크</label>
+                  <input
+                    type="url"
+                    className="form-control form-control-sm"
+                    placeholder="https://... (선택)"
+                    value={form.link}
+                    onChange={(e) => setForm({ ...form, link: e.target.value })}
+                  />
                 </div>
                 {/* 날씨 */}
                 <div className="mb-3">
@@ -603,12 +628,23 @@ export default function Racetracks() {
         <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
           <div className="modal-dialog modal-dialog-scrollable">
             <div className="modal-content">
-              <div className="modal-header py-2">
+              <div className="modal-header py-2" style={{ justifyContent: "space-between" }}>
                 <h6 className="modal-title">
                   <Flag size={14} className="me-1 text-primary" />
                   {selectedRt.racecourse} {selectedRt.distance}m
                 </h6>
-                <button type="button" className="btn-close" onClick={() => setSelectedRt(null)}></button>
+                <div className="d-flex align-items-center gap-2">
+                  {selectedRt.link && (
+                    <button
+                      className="btn btn-outline-neutral btn-sm d-flex align-items-center gap-1"
+                      onClick={() => window.electronAPI.shell.openExternal(selectedRt.link)}
+                    >
+                      <ExternalLink size={13} />
+                      링크
+                    </button>
+                  )}
+                  <button type="button" className="btn-close" onClick={() => setSelectedRt(null)}></button>
+                </div>
               </div>
               <div className="modal-body">
                 {/* 기본 정보 */}

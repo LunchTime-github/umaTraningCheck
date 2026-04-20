@@ -1,10 +1,11 @@
-import { ClipboardList, BarChart2, Flag, Users } from "lucide-react";
+import { ClipboardList, BarChart2, Flag, Users, Settings } from "lucide-react";
 
 const TABS = [
   { id: "training", Icon: ClipboardList, label: "훈련기록", color: "text-warning" },
   { id: "stats", Icon: BarChart2, label: "통계", color: "text-danger" },
   { id: "racetracks", Icon: Flag, label: "마장", color: "text-primary" },
   { id: "wanteduma", Icon: Users, label: "출주희망", color: "text-success" },
+  { id: "settings", Icon: Settings, label: "설정", color: "text-secondary" },
 ];
 
 export default function Navbar({ currentPage, onNavigate }) {

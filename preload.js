@@ -11,4 +11,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   shell: {
     openExternal: (url) => ipcRenderer.invoke('shell:openExternal', url),
   },
+  files: {
+    saveAs: (opts) => ipcRenderer.invoke('file:saveAs', opts),
+  },
 });

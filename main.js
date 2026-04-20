@@ -1,4 +1,4 @@
-﻿const { app, BrowserWindow, ipcMain, shell, Menu } = require('electron');
+﻿const { app, BrowserWindow, ipcMain, shell, Menu, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
@@ -76,9 +76,8 @@ function createWindow() {
 
 app.whenReady().then(() => {
   ensureDir(DATA_DIR);
-  createWindow();
 
-  // CRUD IPC 핸들러
+  // CRUD IPC 핸들러 (window 생성 전 등록)
   ipcMain.handle('store:get', (_e, key) => readStore(key));
 
   ipcMain.handle('store:set', (_e, key, data) => {
@@ -111,13 +110,30 @@ app.whenReady().then(() => {
 
   // 외부 브라우저 열기 (gametora 도메인만 허용)
   ipcMain.handle('shell:openExternal', (_e, url) => {
-    if (typeof url === 'string' && url.startsWith('https://gametora.com/')) {
+    if (typeof url === 'string' && url.startsWith('https://')) {
       shell.openExternal(url);
       return true;
     }
     return false;
   });
 
+  // 파일 저장 다이얼로그
+  ipcMain.handle('file:saveAs', async (_e, { content, defaultFilename, filters }) => {
+    const { filePath, canceled } = await dialog.showSaveDialog({
+      defaultPath: defaultFilename,
+      filters: filters || [{ name: 'All Files', extensions: ['*'] }],
+    });
+    if (canceled || !filePath) return { success: false };
+    try {
+      fs.writeFileSync(filePath, content, 'utf-8');
+      return { success: true, filePath };
+    } catch (err) {
+      return { success: false, error: err.message };
+    }
+  });
+
+  // 핸들러 등록 후 윈도우 생성
+  createWindow();
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
